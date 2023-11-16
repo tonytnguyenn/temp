@@ -310,14 +310,14 @@ int main (int argc, char *argv[]){
     // compute temperatures returning after specified number
     // of iterations
     compute_temp(); 
-
+    
     // time interval calculation associated with MPI process
     time = MPI_Wtime()-time; // new time = end time - start time
-
+    
     // taking the maximum of the individual MPI process times
     double parallel_time;
     MPI_Reduce(&time,&parallel_time,1,MPI_DOUBLE,MPI_MAX,0,MPI_COMM_WORLD);
-
+    print_temp();
     // print temp array output
     if (argc!=4) {
         print_temp();
@@ -327,6 +327,7 @@ int main (int argc, char *argv[]){
                 << std::endl;
         }
     }
+    
 
     // print time or checksum data by itself without temp array output
     // print out the results if there is no suppress output argument
@@ -348,8 +349,8 @@ int main (int argc, char *argv[]){
         else {
             if (rank==0) {
                 // print time in normal human readable format
-                std::cout << "Execution Time = " << parallel_time << " Seconds"
-                     << std::endl;
+                // std::cout << "Execution Time = " << parallel_time << " Seconds"
+                //      << std::endl;
             }
         }
     }
